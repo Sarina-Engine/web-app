@@ -10,6 +10,7 @@ import {
   Flex,
   Grid,
   Navbar,
+  Progress,
   ScrollArea,
   Table,
   Title,
@@ -99,14 +100,24 @@ export default function Category() {
             </NeuBox>
             <NeuBox style={{ height: "100%", wordWrap: "anywhere" }}>
               {data?.data?.[selectedProductIndex] ? (
-                <Table dir="rtl" withColumnBorders>
+                <Table dir="rtl" withColumnBorders sx={{ tableLayout: "fixed" }}>
                   <tbody>
                     {data?.data?.[selectedProductIndex] &&
                       Object.entries(data?.data?.[selectedProductIndex]).map(
                         ([key, value], index) => (
                           <tr key={index}>
                             <td>{key}</td>
-                            <td>{value}</td>
+                            {key != "id" && typeof value == "number" ? (
+                              <td colSpan={3}>
+                                <Progress
+                                  value={value * 100}
+                                  size="xl"
+                                  label={(value * 100).toFixed(2)}
+                                />
+                              </td>
+                            ) : (
+                              <td colSpan={3}>{value}</td>
+                            )}
                           </tr>
                         )
                       )}
@@ -114,9 +125,7 @@ export default function Category() {
                 </Table>
               ) : (
                 <Center h="100%" sx={{ alignItems: "center", flexDirection: "column" }}>
-                  <p>
-                    Select a product to see it&apos;s details
-                  </p>
+                  <p>Select a product to see it&apos;s details</p>
                 </Center>
               )}
             </NeuBox>

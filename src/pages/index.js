@@ -10,7 +10,7 @@ import { useQuery } from "react-query"
 import getCategories from "@/apis/queries/getCategories"
 import { useEffect, useState } from "react"
 
-const inter = Inter({ subsets: ["latin"] })
+// const inter = Inter({ subsets: ["latin"] })
 
 const mockdata = [
   { label: "Dashboard" },
